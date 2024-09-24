@@ -42,7 +42,7 @@ public class Cadastro extends javax.swing.JFrame {
         LdataAdmissao = new javax.swing.JLabel();
         LsalarioBruto = new javax.swing.JLabel();
         Lmatricula = new javax.swing.JLabel();
-        Tnome = new javax.swing.JTextField();
+        Tcidade = new javax.swing.JTextField();
         Tcpf = new javax.swing.JTextField();
         Ttelefone = new javax.swing.JTextField();
         TdataAdmissao = new javax.swing.JTextField();
@@ -56,9 +56,9 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Tnome1 = new javax.swing.JTextField();
-        Tnome2 = new javax.swing.JTextField();
-        Tnome3 = new javax.swing.JTextField();
-        Tnome4 = new javax.swing.JTextField();
+        Trua = new javax.swing.JTextField();
+        Tbairro = new javax.swing.JTextField();
+        Testado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,10 +153,10 @@ public class Cadastro extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
-                            .addComponent(Tnome, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tnome4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tnome3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tnome2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Tcidade, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Testado, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Tbairro, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Trua, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Bvoltar)
@@ -191,7 +191,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Tnome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tnome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Trua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lcpf)
@@ -199,7 +199,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Tcpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tnome3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Tbairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Ltelefone)
@@ -207,7 +207,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Ttelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Tcidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LdataAdmissao)
@@ -215,7 +215,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TdataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tnome4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Testado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(Lmatricula)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,11 +286,15 @@ public class Cadastro extends javax.swing.JFrame {
         Connection conn = sql.realizaConexaoMySQL();
         if (CB1.getSelectedIndex() == 1){
             Professor novoProfessor = new Professor();
-            novoProfessor.setNome(Tnome.getText());
+            novoProfessor.setNome(Tcidade.getText());
             novoProfessor.setCpf(Long.parseLong(Tcpf.getText()));
             novoProfessor.setTelefone(Ttelefone.getText());
             novoProfessor.setDataAdmissao(TdataAdmissao.getText());
             novoProfessor.setSalarioBruto(Double.parseDouble(TsalarioBruto.getText()));
+            novoProfessor.setRua(Trua.getText());
+            novoProfessor.setBairro(Tbairro.getText());
+            novoProfessor.setCidade(Tcidade.getText());
+            novoProfessor.setEstado(Testado.getText());
             arrayProfessor.add(novoProfessor);
             this.Tprofessor = Tprofessor;
             DefaultTableModel model = (DefaultTableModel) this.Taluno.JTaluno.getModel();
@@ -300,17 +304,21 @@ public class Cadastro extends javax.swing.JFrame {
             }
         } else if (CB1.getSelectedIndex() == 2){
             Aluno novoAluno = new Aluno();
-            novoAluno.setNome(Tnome.getText());
+            novoAluno.setNome(Tcidade.getText());
             novoAluno.setCpf(Long.parseLong(Tcpf.getText()));
             novoAluno.setTelefone(Ttelefone.getText());
             novoAluno.setMatricula(Long.parseLong(Tmatricula.getText()));
             novoAluno.setDataNascimento(TdataAdmissao.getText());
             novoAluno.setPeriodo(Integer.parseInt(TsalarioBruto.getText()));
+            novoAluno.setRua(Trua.getText());
+            novoAluno.setBairro(Tbairro.getText());
+            novoAluno.setCidade(Tcidade.getText());
+            novoAluno.setEstado(Testado.getText());
             arrayAluno.add(novoAluno);
             this.Taluno = Taluno;
             DefaultTableModel model = (DefaultTableModel) this.Taluno.JTaluno.getModel();
             for (Aluno obj: arrayAluno){
-                model.addRow(new Object[] {obj.getNome(), obj.getCpf(), obj.getDataNascimento(), obj.getTelefone(), obj.getMatricula(), obj.getPeriodo()});
+                model.addRow(new Object[] {obj.getNome(), obj.getCpf(), obj.getDataNascimento(), obj.getTelefone(), obj.getMatricula(), obj.getPeriodo(), obj.getRua(), obj.getBairro(), obj.getCidade(), obj.getEstado()});
                 sql.insereDadosNoMySQL(obj.getNome(), obj.getCpf(), obj.getTelefone(), obj.getDataNascimento(), obj.getMatricula(), obj.getPeriodo(), obj.getRua(), obj.getBairro(), obj.getCidade(), obj.getEstado());
             }
         }
@@ -367,14 +375,14 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JLabel Lnome;
     private javax.swing.JLabel LsalarioBruto;
     private javax.swing.JLabel Ltelefone;
+    private javax.swing.JTextField Tbairro;
+    private javax.swing.JTextField Tcidade;
     private javax.swing.JTextField Tcpf;
     private javax.swing.JTextField TdataAdmissao;
+    private javax.swing.JTextField Testado;
     private javax.swing.JTextField Tmatricula;
-    private javax.swing.JTextField Tnome;
     private javax.swing.JTextField Tnome1;
-    private javax.swing.JTextField Tnome2;
-    private javax.swing.JTextField Tnome3;
-    private javax.swing.JTextField Tnome4;
+    private javax.swing.JTextField Trua;
     private javax.swing.JTextField TsalarioBruto;
     private javax.swing.JTextField Ttelefone;
     private javax.swing.JLabel jLabel1;

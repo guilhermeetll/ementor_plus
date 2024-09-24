@@ -47,10 +47,10 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Tnome" min="-2" pref="148" max="-2" attributes="0"/>
-                          <Component id="Tnome4" min="-2" pref="148" max="-2" attributes="0"/>
-                          <Component id="Tnome3" min="-2" pref="148" max="-2" attributes="0"/>
-                          <Component id="Tnome2" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Component id="Tcidade" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Component id="Testado" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Component id="Tbairro" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Component id="Trua" min="-2" pref="148" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
@@ -97,7 +97,7 @@
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Tnome1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Tnome2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Trua" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -107,7 +107,7 @@
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Tcpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Tnome3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Tbairro" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -117,7 +117,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Ttelefone" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Tnome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Tcidade" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -127,7 +127,7 @@
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="TdataAdmissao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Tnome4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Testado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="Lmatricula" min="-2" max="-2" attributes="0"/>
@@ -185,7 +185,7 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Tnome">
+    <Component class="javax.swing.JTextField" name="Tcidade">
     </Component>
     <Component class="javax.swing.JTextField" name="Tcpf">
       <Events>
@@ -270,11 +270,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="Tnome1">
     </Component>
-    <Component class="javax.swing.JTextField" name="Tnome2">
+    <Component class="javax.swing.JTextField" name="Trua">
     </Component>
-    <Component class="javax.swing.JTextField" name="Tnome3">
+    <Component class="javax.swing.JTextField" name="Tbairro">
     </Component>
-    <Component class="javax.swing.JTextField" name="Tnome4">
+    <Component class="javax.swing.JTextField" name="Testado">
     </Component>
   </SubComponents>
 </Form>

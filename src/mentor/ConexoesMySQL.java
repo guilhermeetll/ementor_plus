@@ -119,6 +119,11 @@ public class ConexoesMySQL {
                 ObjetoAluno.Nome = ResultadoSelecao.getString("Nome");
                 ObjetoAluno.DataNascimento = ResultadoSelecao.getString("DataNascimento");
                 ObjetoAluno.Telefone = ResultadoSelecao.getString("Telefone");
+                ObjetoAluno.Rua = ResultadoSelecao.getString("Nome");
+                ObjetoAluno.Rua = ResultadoSelecao.getString("Rua");
+                ObjetoAluno.Bairro = ResultadoSelecao.getString("Bairro");
+                ObjetoAluno.Cidade = ResultadoSelecao.getString("Cidade");
+                ObjetoAluno.Estado = ResultadoSelecao.getString("Estado");
                 ObjetoAluno.setMatricula(ResultadoSelecao.getLong("Matricula"));
                 ObjetoAluno.setPeriodo(ResultadoSelecao.getInt("Periodo"));
                        

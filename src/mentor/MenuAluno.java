@@ -40,6 +40,11 @@ public class MenuAluno extends javax.swing.JFrame {
         });
 
         jButton3.setText("< voltar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Listar Alunos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +94,12 @@ public class MenuAluno extends javax.swing.JFrame {
         ListagemAluno telaListagemAluno = new ListagemAluno();
         telaListagemAluno.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.setVisible(false);
+        Menu menu = new Menu();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

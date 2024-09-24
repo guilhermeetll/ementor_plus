@@ -32,8 +32,8 @@ public class PesquisarAluno extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         TnovoPeriodo = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        LnovoPeriodo = new javax.swing.JLabel();
+        Balterar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,14 +60,14 @@ public class PesquisarAluno extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Digite o novo periodo:");
-        jLabel2.setEnabled(false);
+        LnovoPeriodo.setText("Digite o novo periodo:");
+        LnovoPeriodo.setEnabled(false);
 
-        jButton2.setText("Alterar");
-        jButton2.setEnabled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Balterar.setText("Alterar");
+        Balterar.setEnabled(false);
+        Balterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BalterarActionPerformed(evt);
             }
         });
 
@@ -94,10 +94,10 @@ public class PesquisarAluno extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
+                            .addComponent(LnovoPeriodo)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(120, 120, 120)
-                                .addComponent(jButton2)))
+                                .addComponent(Balterar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
             .addGroup(layout.createSequentialGroup()
@@ -117,11 +117,11 @@ public class PesquisarAluno extends javax.swing.JFrame {
                     .addComponent(Tmatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(LnovoPeriodo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TnovoPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(Balterar)
                 .addGap(59, 59, 59))
         );
 
@@ -137,9 +137,9 @@ public class PesquisarAluno extends javax.swing.JFrame {
         ConexoesMySQL sql = new ConexoesMySQL();
         Aluno aluno = sql.buscaAluno(Tmatricula.getText());
         if (aluno != null){
-            jLabel2.setEnabled(true);
+            LnovoPeriodo.setEnabled(true);
             TnovoPeriodo.setEnabled(true);
-            jButton2.setEnabled(true);
+            Balterar.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(null, "Aluno não encontrado", "Informacao", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -149,9 +149,15 @@ public class PesquisarAluno extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TnovoPeriodoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BalterarActionPerformed
+        ConexoesMySQL sql = new ConexoesMySQL();
+        sql.atualizaDadosNoMySQL(this.Tmatricula.getText(), this.TnovoPeriodo.getText());
+        this.Tmatricula.setText("");
+        this.TnovoPeriodo.setText("");
+        this.TnovoPeriodo.setEnabled(false);
+        this.LnovoPeriodo.setEnabled(false);
+        this.Balterar.setEnabled(false);
+    }//GEN-LAST:event_BalterarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.setVisible(false);
@@ -193,12 +199,12 @@ public class PesquisarAluno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Balterar;
+    private javax.swing.JLabel LnovoPeriodo;
     private javax.swing.JTextField Tmatricula;
     private javax.swing.JTextField TnovoPeriodo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
