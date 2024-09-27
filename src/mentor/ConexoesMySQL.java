@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -82,11 +83,48 @@ public class ConexoesMySQL {
         }
         desconectaMySQL(conexao);
     }  
+    public void insereDadosNoMySQLProfessor(String nome, long CPF, String contato, String Data, String dataAdmissao, double salarioBruto, double inss, double irpf, double salarioLiquido, String rua, String bairro, String cidade, String estado){
+        Connection conexao = realizaConexaoMySQL();
+        String sql_pessoa = "insert into pessoa (CPF, Nome, Telefone, DataNascimento, Rua, Bairro, Cidade, Estado) values (?,?,?,?,?,?,?,?)";
+        String sql_professor = "insert into professor (DataAdmissao,CPF_Professor,SalarioBruto,INSS,IRPF,SalarioLiquido) values (?,?,?,?,?,?)";
+        
+        try{//Aqui serão aplicados todos os recursos para efetivar a inserção dos daddo nas Tabelas do MySQL
+            PreparedStatement Atuador_pessoa = conexao.prepareStatement(sql_pessoa);
+            PreparedStatement Atuador_professor = conexao.prepareStatement(sql_professor);
+            
+            /*Seção para setar os campos no atuador */
+            Atuador_pessoa.setLong(1, CPF);//Substitui a primeira interrogação no insert into aluno
+            Atuador_pessoa.setString(2, nome);//Substitui a segunda interrogação no insert into aluno
+            Atuador_pessoa.setString(3, contato); //Substitui a terceira interrogação no insert into aluno
+            Atuador_pessoa.setString(4, Data);//Substitui a última interrogação no insert into aluno
+            Atuador_pessoa.setString(5, rua);//Substitui a última interrogação no insert into aluno
+            Atuador_pessoa.setString(6, bairro);//Substitui a última interrogação no insert into aluno
+            Atuador_pessoa.setString(7, cidade);//Substitui a última interrogação no insert into aluno
+            Atuador_pessoa.setString(8, estado);//Substitui a última interrogação no insert into aluno
+            
+            Atuador_pessoa.execute();//Nesse momento estará sendo lançado o comando insert into "fisisicamente" no MySQL
+            
+            // Idem ao passos anteriores
+            Atuador_professor.setString(1, dataAdmissao);
+            Atuador_professor.setLong(2, CPF);
+            Atuador_professor.setDouble(3, salarioBruto);
+            Atuador_professor.setDouble(4, inss);  
+            Atuador_professor.setDouble(5, irpf);  
+            Atuador_professor.setDouble(6, salarioLiquido);  
+            
+            Atuador_professor.execute();
+            JOptionPane.showMessageDialog(null,"Cadastro Realizado com Sucesso","Salvar",JOptionPane.INFORMATION_MESSAGE);
+          }catch(SQLException e){
+          JOptionPane.showMessageDialog(null,"Algum imprevisto ocorreu: "+e+"","ERRO",JOptionPane.ERROR_MESSAGE);
+          
+        }
+        desconectaMySQL(conexao);
+    }  
     //////////////////////////////////////////////////////////////////////
     public void atualizaDadosNoMySQL(String matricula, String periodo){
         Connection conexao = realizaConexaoMySQL();
         String sql ="update ementor.pessoa, ementor.aluno set Periodo="+periodo+" where CPF=CPF_Pessoa and Matricula="+matricula+";";
-       
+
         //update ementor.pessoa set pessoa.Nome="Fulado de tal" where pessoa.CPF="12345678910". 
         try{//Aqui serão aplicados todos os recursos para efetivar a inserção dos daddo nas Tabelas do MySQL
             PreparedStatement Atuador = conexao.prepareStatement(sql);  
@@ -101,6 +139,31 @@ public class ConexoesMySQL {
         }
         desconectaMySQL(conexao);
     }
+    
+    public void atualizaDadosNoMySQLEgressor(String matricula){
+        Connection conexao = realizaConexaoMySQL();
+        LocalDate dataAtual = LocalDate.now();
+        
+        // Converter para string
+        String dataString = dataAtual.toString();
+        
+        String sql ="update ementor.pessoa, ementor.aluno set DataEgressor="+dataString+" where CPF=CPF_Pessoa and Matricula="+matricula+";";
+       
+        //update ementor.pessoa set pessoa.Nome="Fulado de tal" where pessoa.CPF="12345678910". 
+        try{//Aqui serão aplicados todos os recursos para efetivar a inserção dos daddo nas Tabelas do MySQL
+            PreparedStatement Atuador = conexao.prepareStatement(sql);  
+            
+            /*Seção para setar os campos no atuador */          
+            Atuador.execute();//Nesse momento estará sendo lançado o comando update "fisisicamente" no MySQL
+                     
+           JOptionPane.showMessageDialog(null,"Aluno Egressor cadastrado com sucesso","Salvar",JOptionPane.INFORMATION_MESSAGE);
+          }catch(SQLException e){
+          JOptionPane.showMessageDialog(null,"Algum imprevisto ocorreu: "+e+"","ERRO",JOptionPane.ERROR_MESSAGE);
+          
+        }
+        desconectaMySQL(conexao);
+    }
+    
     
     ///////////////////////////////////////////////////////////
     public ArrayList<Aluno> recuperaDadosDoMySQL(String tipoOrdenacao){
@@ -140,11 +203,56 @@ public class ConexoesMySQL {
         desconectaMySQL(conexao); //Fecha a conexão do Banco de Dados
         return Academico;
     }
+    public ArrayList<Professor> recuperaDadosDoMySQLProfessor(String tipoOrdenacao){
+        Connection conexao = realizaConexaoMySQL();//Estabelece conexão
+        ArrayList<Professor> prof = new ArrayList();//Cria uma lista chamada Academico do Tipo Aluno
+        
+        try{            
+            String sql_selecao_aluno = "SELECT *FROM ementor.pessoa, ementor.professor WHERE pessoa.CPF=professor.CPF_Pessoa ORDER BY "+tipoOrdenacao+";";
+            PreparedStatement atuador_selecao_professor = conexao.prepareStatement(sql_selecao_aluno);
+            ResultSet ResultadoSelecao = atuador_selecao_professor.executeQuery(); //É aqui que fica o resultado da selação do MySQL
+            /*Secao para percorrer todas as linhas resultantes da seleção- Logo, deve-se usar um laço de repetição  */
+            while(ResultadoSelecao.next()){//Laço de repetição para percorrer todo o conjuto de resultados "ResultSet" trazidos pela Query
+                Professor ObjetoAluno = new Professor();//Cria objeto aluno
+                /*Seção para inserir em cada atributo do objetoAluno os valores dos campos do MySQL */
+                ObjetoAluno.CPF = ResultadoSelecao.getLong("CPF");
+                ObjetoAluno.Nome = ResultadoSelecao.getString("Nome");
+                ObjetoAluno.DataNascimento = ResultadoSelecao.getString("DataNascimento");
+                ObjetoAluno.Telefone = ResultadoSelecao.getString("Telefone");
+                ObjetoAluno.Rua = ResultadoSelecao.getString("Nome");
+                ObjetoAluno.Rua = ResultadoSelecao.getString("Rua");
+                ObjetoAluno.Bairro = ResultadoSelecao.getString("Bairro");
+                ObjetoAluno.Cidade = ResultadoSelecao.getString("Cidade");
+                ObjetoAluno.Estado = ResultadoSelecao.getString("Estado");
+                ObjetoAluno.setDataAdmissao(ResultadoSelecao.getString("DataAdmissao"));
+                ObjetoAluno.setSalarioBruto(ResultadoSelecao.getDouble("SalarioBruto"));
+                       
+                prof.add(ObjetoAluno);//Adiciona à Lista o Objeto Atual        
+                      
+            }
+              ResultadoSelecao.close();
+              atuador_selecao_professor.close();                   
+                    
+             }catch(SQLException e){
+              JOptionPane.showMessageDialog(null,"Algum imprevisto ocorreu: "+e+"","ERRO",JOptionPane.ERROR_MESSAGE);
+          
+        }
+        desconectaMySQL(conexao); //Fecha a conexão do Banco de Dados
+        return prof;
+    }
+    
+    
     ///////////////////////////////////////////////////////////////////////////
     public Aluno buscaAluno(String matricula){
         Connection conexao = realizaConexaoMySQL();//Estabelece conexão
         Aluno Academico  = new Aluno();//Cria um vetor chamado Academico do Tipo Aluno
         Academico=null;
+        System.out.println(this.buscaAlunoEgressor(matricula));
+        if (this.buscaAlunoEgressor(matricula)){
+            JOptionPane.showMessageDialog(null,"Aluno não pode ser um egressor","ERRO",JOptionPane.ERROR_MESSAGE);
+            desconectaMySQL(conexao);
+            return null;
+        };
         try{            
             String sql_selecao_aluno = "SELECT *FROM ementor.pessoa, ementor.aluno WHERE pessoa.CPF=aluno.CPF_Pessoa and aluno.Matricula="+matricula+";";
             PreparedStatement atuador_selecao_aluno = conexao.prepareStatement(sql_selecao_aluno);
@@ -174,6 +282,34 @@ public class ConexoesMySQL {
         }
         desconectaMySQL(conexao); //Fecha a conexão do Banco de Dados
         return Academico;
+    }
+    
+    public boolean buscaAlunoEgressor(String matricula){
+        Connection conexao = realizaConexaoMySQL();//Estabelece conexão
+        Aluno Academico  = new Aluno();//Cria um vetor chamado Academico do Tipo Aluno
+        Academico=null;
+        try{            
+            String sql_selecao_aluno = "SELECT *FROM ementor.pessoa, ementor.aluno WHERE pessoa.CPF=aluno.CPF_Pessoa and aluno.Matricula="+matricula+";";
+            PreparedStatement atuador_selecao_aluno = conexao.prepareStatement(sql_selecao_aluno);
+            ResultSet ResultadoSelecao = atuador_selecao_aluno.executeQuery(); //É aqui que fica o resultado da selação do MySQL
+            /*Secao para percorrer todas as linhas resultantes da seleção- Logo, deve-se usar um laço de repetição  */
+           // ResultadoSelecao.previous();
+            while(ResultadoSelecao.next()){//Laço de repetição para percorrer todo o conjuto de resultados "ResultSet" trazidos pela Query
+                //ResultadoSelecao.first();
+                System.out.println(ResultadoSelecao.getString("DataEgressor"));
+                if (ResultadoSelecao.getString("DataEgressor") != null){
+                    return true;
+                };       
+                      
+            }
+              ResultadoSelecao.close();
+              atuador_selecao_aluno.close();                   
+                    
+             }catch(SQLException e){
+              JOptionPane.showMessageDialog(null,"Algum imprevisto ocorreu: "+e+"","ERRO",JOptionPane.ERROR_MESSAGE);
+          
+        }
+        return false;
     }
 
     public Usuario efetuaLogin(Usuario usuario){

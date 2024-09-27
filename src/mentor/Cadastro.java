@@ -260,13 +260,16 @@ public class Cadastro extends javax.swing.JFrame {
             LdataAdmissao.setEnabled(true);
             LsalarioBruto.setEnabled(true);
             LdataAdmissao.setText("Data Admissao:");
+            Tmatricula.setEnabled(true);
+            Lmatricula.setEnabled(true);
+            Lmatricula.setText("Data Nascimento:");
             LsalarioBruto.setText("Salario Bruto:");
         }else if (CB1.getSelectedIndex() == 2){
             TdataAdmissao.setEnabled(true);
             TsalarioBruto.setEnabled(true);
             LdataAdmissao.setEnabled(true);
             LsalarioBruto.setEnabled(true);
-            Tmatricula.setEnabled(true);
+            Lmatricula.setText("Matricula:");
             Lmatricula.setEnabled(true);
             LdataAdmissao.setText("Data Nascimento:");
             LsalarioBruto.setText("Periodo:");
@@ -286,10 +289,11 @@ public class Cadastro extends javax.swing.JFrame {
         Connection conn = sql.realizaConexaoMySQL();
         if (CB1.getSelectedIndex() == 1){
             Professor novoProfessor = new Professor();
-            novoProfessor.setNome(Tcidade.getText());
+            novoProfessor.setNome(Tnome1.getText());
             novoProfessor.setCpf(Long.parseLong(Tcpf.getText()));
             novoProfessor.setTelefone(Ttelefone.getText());
             novoProfessor.setDataAdmissao(TdataAdmissao.getText());
+            novoProfessor.setDataNascimento(Tmatricula.getText());
             novoProfessor.setSalarioBruto(Double.parseDouble(TsalarioBruto.getText()));
             novoProfessor.setRua(Trua.getText());
             novoProfessor.setBairro(Tbairro.getText());
@@ -299,12 +303,12 @@ public class Cadastro extends javax.swing.JFrame {
             this.Tprofessor = Tprofessor;
             DefaultTableModel model = (DefaultTableModel) this.Taluno.JTaluno.getModel();
             for (Professor obj: arrayProfessor){
-                model.addRow(new Object[] {obj.getNome(), obj.getCpf(), obj.getTelefone(), obj.getDataAdmissao(), obj.getSalarioBruto()});
-                // sql.insereDadosNoMySQL(obj.getNome(), obj.getCpf(), obj.getTelefone(), obj.getDataAdmissao(), NORMAL, ERROR);
+                model.addRow(new Object[] {obj.getNome(), obj.getCpf(), obj.getTelefone(), obj.getDataNascimento(), obj.getDataAdmissao(), obj.getSalarioBruto(), obj.getINSS(), obj.getIRPF(), obj.getSalarioLiquido(), obj.getRua(), obj.getBairro(), obj.getCidade(), obj.getEstado()});
+                sql.insereDadosNoMySQLProfessor(obj.getNome(), obj.getCpf(), obj.getTelefone(), obj.getDataNascimento(), obj.getDataAdmissao(), obj.getSalarioBruto(), obj.getINSS(), obj.getIRPF(), obj.getSalarioLiquido(), obj.getRua(), obj.getBairro(), obj.getCidade(), obj.getEstado());
             }
         } else if (CB1.getSelectedIndex() == 2){
             Aluno novoAluno = new Aluno();
-            novoAluno.setNome(Tcidade.getText());
+            novoAluno.setNome(Tnome1.getText());
             novoAluno.setCpf(Long.parseLong(Tcpf.getText()));
             novoAluno.setTelefone(Ttelefone.getText());
             novoAluno.setMatricula(Long.parseLong(Tmatricula.getText()));
